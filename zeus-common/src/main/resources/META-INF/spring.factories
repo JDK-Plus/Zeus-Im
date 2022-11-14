@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  plus.jdk.zeus.common.global.ZeusGrpcAuthAutoConfiguration,\
+  plus.jdk.zeus.common.global.ZeusCommonAutoConfiguration

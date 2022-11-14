@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package plus.jdk.zeus.common.grpc.protoc;
+
+option java_multiple_files = true;
+option java_package = "plus.jdk.zeus.common.grpc.protoc";
+option optimize_for = CODE_SIZE;
+
+message GrpcAuthToken {
+
+    // 颁发业务线的标识
+    string app_key = 1;
+
+    // 当前的unix毫秒时间戳
+    int64 timestamp = 2;
+
+    // 请求的traceId
+    string trace_id = 3;
+}
