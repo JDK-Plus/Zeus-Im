@@ -24,7 +24,7 @@ public class ZeusRsaAuthSecret {
     private String publicKey;
 
     /**
-     * 白名单，当前业务有调用哪些接口的权限
+     * 白名单，当前业务有调用哪些服务接口的调用权限
      */
     private Set<String> whiteList = new HashSet<>();
 }

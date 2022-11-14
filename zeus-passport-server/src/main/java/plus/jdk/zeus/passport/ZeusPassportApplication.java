@@ -9,7 +9,8 @@ public class ZeusPassportApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(ZeusPassportApplication.class)
-                .web(WebApplicationType.NONE)
+//                .web(WebApplicationType.NONE)
+                .build()
                 .run(args);
     }
 }

@@ -35,6 +35,10 @@ public class GrpcAuthServerInterceptor implements ServerInterceptor {
             call.close(Status.PERMISSION_DENIED, headers);
             return next.startCall(call, headers);
         }
+        if(!inServiceWhiteList(call, rsaAuthSecret)) {
+            call.close(Status.PERMISSION_DENIED, headers);
+            return next.startCall(call, headers);
+        }
         try{
             RSA rsa = rsaCipherService.getRSAHandler(appKey);
             byte[] plainBase64Bytes = rsa.privateDecryptBytes(new String(tokenBytes));
@@ -52,5 +56,15 @@ public class GrpcAuthServerInterceptor implements ServerInterceptor {
             return next.startCall(call, headers);
         }
         return next.startCall(call, headers);
+    }
+
+    private <ReqT, RespT> boolean inServiceWhiteList(ServerCall<ReqT, RespT> call, ZeusRsaAuthSecret rsaAuthSecret) {
+        boolean hasPermission = false;
+        for(String serverName: rsaAuthSecret.getWhiteList()) {
+            if(serverName.startsWith(call.getMethodDescriptor().getFullMethodName())) {
+                hasPermission = true;
+            }
+        }
+        return hasPermission;
     }
 }

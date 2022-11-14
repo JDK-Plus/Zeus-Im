@@ -7,7 +7,7 @@ import plus.jdk.grpc.client.interceptor.marshaller.DefaultAsciiMarshaller;
 import plus.jdk.zeus.common.RSACipherService;
 import plus.jdk.zeus.common.crypt.RSA;
 import plus.jdk.zeus.common.grpc.protoc.GrpcAuthToken;
-import plus.jdk.zeus.common.model.ZeusRsaAuthSecret;
+import plus.jdk.zeus.common.skeleton.IdGenerator;
 
 import java.util.HashMap;
 
@@ -17,7 +17,7 @@ public class ZeusGrpcClientRSAInterceptor implements ClientInterceptor {
 
     private final RSACipherService rsaCipherService;
 
-    public ZeusGrpcClientRSAInterceptor(ZeusRsaAuthSecret rsaAuthSecret, String appKey, RSACipherService rsaCipherService) {
+    public ZeusGrpcClientRSAInterceptor(String appKey, RSACipherService rsaCipherService) {
         this.appKey = appKey;
         this.rsaCipherService = rsaCipherService;
     }
@@ -35,8 +35,8 @@ public class ZeusGrpcClientRSAInterceptor implements ClientInterceptor {
                 RSA rsa = rsaCipherService.getRSAHandler(appKey);
                 GrpcAuthToken.Builder builder = GrpcAuthToken.newBuilder();
                 builder.setAppKey(appKey);
-                builder.setTimestamp(System.currentTimeMillis());
-                builder.setTraceId("TODO");
+                builder.setTimestamp(timestamp);
+                builder.setTraceId(String.valueOf(IdGenerator.getId()));
                 GrpcAuthToken grpcAuthToken = builder.build();
                 String plainText = Base64.encodeBase64String(grpcAuthToken.toByteArray());
                 String cipherText = rsa.publicEncrypt(plainText);
