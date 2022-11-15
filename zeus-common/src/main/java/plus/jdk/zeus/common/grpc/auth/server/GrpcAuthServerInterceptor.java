@@ -61,7 +61,7 @@ public class GrpcAuthServerInterceptor implements ServerInterceptor {
     private <ReqT, RespT> boolean inServiceWhiteList(ServerCall<ReqT, RespT> call, ZeusRsaAuthSecret rsaAuthSecret) {
         boolean hasPermission = false;
         for(String serverName: rsaAuthSecret.getWhiteList()) {
-            if(serverName.startsWith(call.getMethodDescriptor().getFullMethodName())) {
+            if(call.getMethodDescriptor().getFullMethodName().startsWith(serverName)) {
                 hasPermission = true;
             }
         }
