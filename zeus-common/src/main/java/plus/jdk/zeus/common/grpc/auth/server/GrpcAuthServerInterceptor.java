@@ -9,14 +9,14 @@ import plus.jdk.zeus.common.RSACipherService;
 import plus.jdk.zeus.common.crypt.RSA;
 import plus.jdk.zeus.common.grpc.protoc.GrpcAuthToken;
 import plus.jdk.zeus.common.model.ZeusRsaAuthSecret;
-import plus.jdk.zeus.common.properties.ZeusGrpcAuthProperties;
+import plus.jdk.zeus.common.properties.ZeusGrpcProperties;
 import plus.jdk.zeus.common.skeleton.ZeusCommonException;
 
 @Component
 @AllArgsConstructor
 public class GrpcAuthServerInterceptor implements ServerInterceptor {
 
-    private final ZeusGrpcAuthProperties zeusGrpcAuthProperties;
+    private final ZeusGrpcProperties zeusGrpcProperties;
 
     private final RSACipherService rsaCipherService;
 

@@ -5,13 +5,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import plus.jdk.zeus.common.annotation.EnableZeusGrpcAuthenticate;
-import plus.jdk.zeus.common.properties.ZeusGrpcAuthProperties;
+import plus.jdk.zeus.common.properties.ZeusGrpcProperties;
 
 @Slf4j
 @Configuration
 @EnableZeusGrpcAuthenticate
 @ConditionalOnProperty(prefix = "plus.jdk.zeus.grpc.auth", name = "enabled", havingValue = "true")
-@EnableConfigurationProperties(ZeusGrpcAuthProperties.class)
+@EnableConfigurationProperties(ZeusGrpcProperties.class)
 public class ZeusGrpcAuthAutoConfiguration {
 
 }
